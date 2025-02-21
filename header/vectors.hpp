@@ -34,24 +34,27 @@ public:
     {
 
     }
-    StdVector(unsigned int iniSize): v(new T[0]), size(0), actualSize(iniSize)
+    StdVector(unsigned int iniSize): v(new T[iniSize]), size(0), actualSize(iniSize)
     {
 
     }
     virtual void append(T value) override 
     {
-        if (actualSize > size)
+        if (v != nullptr)
         {
-            v[size++] = value;
-        }
-        else
-        {
-            T* other = new T[size + 1];
-            memcpy(other, v, size);
-            other[size] = value;
-            size++;
-            delete[] v;
-            v = other;
+            if (actualSize > size)
+            {
+                v[size++] = value;
+            }
+            else
+            {
+                T* other = new T[size + 1];
+                memcpy(other, v, size);
+                other[size] = value;
+                size++;
+                delete[] v;
+                v = other;
+            }
         }
     }
     virtual void insert(T value, unsigned int ind) override {}
@@ -67,7 +70,10 @@ public:
     }
     virtual ~StdVector()
     {
-        delete[] v;
+        if (v != nullptr)
+        {
+            delete[] v;
+        }
     }
 };
 
