@@ -11,7 +11,7 @@ public:
     virtual void append(T value) = 0;
     virtual void insert(T value, unsigned int ind) = 0;
     virtual void remove(unsigned int ind) = 0;
-    virtual void print(void) = 0;
+    virtual void print(void) const = 0;
     virtual ~Vector() {}
 };
 
@@ -59,7 +59,7 @@ public:
     }
     virtual void insert(T value, unsigned int ind) override {}
     virtual void remove(unsigned int ind) override {}
-    virtual void print(void) override
+    virtual void print(void) const override
     {
         cout << "[ ";
         for (unsigned int ind = 0; ind < size; ind++)
